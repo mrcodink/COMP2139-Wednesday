@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMP2139-ICE", "COMP2139-ICE\COMP2139-ICE.csproj", "{AFA9EA77-CAF2-44EB-BB72-2756D3B0DBF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMP2139-Labs", "COMP2139-Labs\COMP2139-Labs.csproj", "{AFA9EA77-CAF2-44EB-BB72-2756D3B0DBF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
