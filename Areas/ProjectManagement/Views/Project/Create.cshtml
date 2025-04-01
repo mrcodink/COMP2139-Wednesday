@@ -1,0 +1,57 @@
+﻿@model Project
+
+@{
+    ViewData["Title"] = "Create Project";
+}
+
+<h2>Create Project</h2>
+
+<form asp-area="ProjectManagement" asp-controller="Project" asp-action="Create" method="post">
+    
+    <div class="form-group">
+        <label asp-for="ProjectName" class="control-label"></label>
+        <input asp-for="ProjectName" class="form-control"/>
+        <span asp-validation-for="ProjectName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProjectDescription" class="control-label"></label>
+        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="ProjectStartDate" class="form-control"></label>
+        <input asp-for="ProjectStartDate" type="date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="ProjectEndDate" class="form-control"></label>
+        <input asp-for="ProjectEndDate" type="date" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Status" class="form-control">Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="">Select a Status</option>
+            <option value="New">New</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Closed">Closed</option>
+            <option value="Complete">Complete</option>
+        </select>
+    </div>
+    
+    <!-- Include other form fields here -->
+    
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary">
+        <a asp-action="Index" class="btn btn-warning">Cancel</a>
+    </div>
+
+
+
+</form>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
