@@ -1,5 +1,5 @@
 ﻿using COMP2139_Labs.Data;
-using COMP2139_Labs.Models;
+using COMP2139_Labs.Models; 
 using COMP2139_Labs.Areas.ProjectManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +11,12 @@ namespace COMP2139_Labs.Areas.ProjectManagement.Controllers;
 [Route("[area]/[controller]/[action]")]
 public class ProjectController : Controller
 {
-
+    private readonly ILogger<ProjectController> _logger;
     private readonly ApplicationDbContext _context;
 
-    public ProjectController(ApplicationDbContext context)
+    public ProjectController(ApplicationDbContext context, ILogger<ProjectController> logger)
     {
+        _logger = logger;
         _context = context;
     }
     
@@ -31,6 +32,7 @@ public class ProjectController : Controller
     [HttpGet("Create")]
     public IActionResult Create()
     {
+        _logger.LogInformation("Accessed ProjectController Index at {Time}", DateTime.Now);
         return View();
     }
     
@@ -39,6 +41,7 @@ public class ProjectController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Project project)
     {
+        _logger.LogInformation("Accessed ProjectController Index at {Time}", DateTime.Now);
         if (ModelState.IsValid)
         {
             project.ProjectStartDate = DateTime.SpecifyKind(project.ProjectStartDate, DateTimeKind.Utc);
@@ -57,11 +60,14 @@ public class ProjectController : Controller
     [HttpGet("Details/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
+        _logger.LogInformation("Accessed ProjectController Index at {Time}", DateTime.Now);
+        
         //var project = new Project { ProjectId = id, ProjectName = "Project 1", ProjectDescription = "First Project"};
         // Retrieves the project with the specified id or returns null if not found
         var project = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectId == id);
         if (project == null)
         {
+            _logger.LogWarning("Could not find Project with id of {id}", id);
             return NotFound(); // 404 error
         }
         return View(project);

@@ -1,10 +1,11 @@
 ﻿using COMP2139_Labs.Models;
 using COMP2139_Labs.Areas.ProjectManagement.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace COMP2139_Labs.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     
@@ -15,6 +16,8 @@ public class ApplicationDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         //Define One-to-Many Relationship
         modelBuilder.Entity<Project>()
             .HasMany(p => p.Tasks)                   // One project has (potentially) many Tasks
